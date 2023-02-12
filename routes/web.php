@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Http\Controllers\Admin\NewsController;
+Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function(){
+    Route::get('news/create', 'add')->name('news.add');
+    Route::post('news/create', 'create')->name('news.create');
+    Route::get('news', 'index')->name('news.index');
+    Route::get('news/edit', 'edit')->name('news.edit');
+    Route::post('news/edit', 'update')->name('news.update');
+    Route::get('news/delate', 'delate')->name('news.delate');
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\NewsController as PublicNewsController;
+Route::get('/', [PublicNewsController::class, 'index'])->name('news.index');

@@ -1,0 +1,14 @@
+# cron configuration
+## MyDNS User/Password ###########
+MYDNS_USER=mydns297851
+MYDNS_PASSWORD=ZirayHFRA9e
+##################################
+
+## Invalidate Mail notification
+MAILTO=""
+
+# mydns notification, at 04:00 everyday
+0 4 * * * ///usr/bin/wget -O - "http://$MYDNS_USER:$MYDNS_PASSWORD@www.mydns.jp/login.html" > /dev/null 2>&1
+
+# renew let's encrypt certificates, at 03:00 1st of every month
+0 3 1 * * /usr/bin/certbot renew --no-self-upgrade > /dev/null 2>&1
