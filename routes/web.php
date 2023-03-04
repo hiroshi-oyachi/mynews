@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('AAA', 'bbb');
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,3 +33,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\NewsController as PublicNewsController;
 Route::get('/', [PublicNewsController::class, 'index'])->name('news.index');
+
+use App\Http\Controllers\admin\ProfileController;
+Route::controller(ProfileController::class)->prefix('admin')->group(function() {
+    Route::get('admin/profile/create', 'add');
+    Route::get('admin/profile/edit', 'edit');
+});
