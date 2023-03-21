@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Profile;
 
 class ProfileController extends Controller
 {
@@ -24,9 +25,14 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.profile.edit');
+        // News Modelからデータを取得する
+        $profile = Profile::find($request->id);
+        if (empty($profile)) {
+            abort(404);
+        }
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
     public function update()
