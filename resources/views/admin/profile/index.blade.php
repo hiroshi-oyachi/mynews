@@ -11,7 +11,7 @@
                 <a href="{{ route('admin.profile.add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
             <div class="col-md-8">
-                <form action="{{ route('admin.profile.index') }}" method="get">
+                <form action="{{ route('profile.index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">名前</label>
                         <div class="col-md-8">
